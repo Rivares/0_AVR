@@ -1,0 +1,808 @@
+
+test5.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000008  00800100  000003ce  00000462  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000003ce  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800108  00800108  0000046a  2**0
+                  ALLOC
+  3 .debug_aranges 000000b0  00000000  00000000  0000046a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000010e  00000000  00000000  0000051a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000b7e  00000000  00000000  00000628  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000002d4  00000000  00000000  000011a6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000933  00000000  00000000  0000147a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000120  00000000  00000000  00001db0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000188  00000000  00000000  00001ed0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000357  00000000  00000000  00002058  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 000001f0  00000000  00000000  000023af  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+    PORT_I2C &= ~ _BV(SCL); _delay_us(pause);   
+    return (check);      
+}                        
+
+void i2c_mack(void)      
+{ 
+   0:	33 c0       	rjmp	.+102    	; 0x68 <__ctors_end>
+	DDRC |= (1 << PC4)|(1 << PC5);	//  SDA, SCL - out
+	PORTC |= (1 << PC4)|(1 << PC5); //  SDA, SCL = 1
+}
+
+void blink()
+{
+   2:	00 00       	nop
+   4:	4c c0       	rjmp	.+152    	; 0x9e <__bad_interrupt>
+   6:	00 00       	nop
+   8:	4a c0       	rjmp	.+148    	; 0x9e <__bad_interrupt>
+   a:	00 00       	nop
+   c:	48 c0       	rjmp	.+144    	; 0x9e <__bad_interrupt>
+   e:	00 00       	nop
+  10:	46 c0       	rjmp	.+140    	; 0x9e <__bad_interrupt>
+  12:	00 00       	nop
+  14:	44 c0       	rjmp	.+136    	; 0x9e <__bad_interrupt>
+  16:	00 00       	nop
+  18:	42 c0       	rjmp	.+132    	; 0x9e <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	40 c0       	rjmp	.+128    	; 0x9e <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	3e c0       	rjmp	.+124    	; 0x9e <__bad_interrupt>
+  22:	00 00       	nop
+  24:	3c c0       	rjmp	.+120    	; 0x9e <__bad_interrupt>
+  26:	00 00       	nop
+  28:	3a c0       	rjmp	.+116    	; 0x9e <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	38 c0       	rjmp	.+112    	; 0x9e <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	36 c0       	rjmp	.+108    	; 0x9e <__bad_interrupt>
+  32:	00 00       	nop
+  34:	34 c0       	rjmp	.+104    	; 0x9e <__bad_interrupt>
+  36:	00 00       	nop
+  38:	32 c0       	rjmp	.+100    	; 0x9e <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	30 c0       	rjmp	.+96     	; 0x9e <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	2e c0       	rjmp	.+92     	; 0x9e <__bad_interrupt>
+  42:	00 00       	nop
+  44:	2c c0       	rjmp	.+88     	; 0x9e <__bad_interrupt>
+  46:	00 00       	nop
+  48:	2a c0       	rjmp	.+84     	; 0x9e <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	28 c0       	rjmp	.+80     	; 0x9e <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	26 c0       	rjmp	.+76     	; 0x9e <__bad_interrupt>
+  52:	00 00       	nop
+  54:	24 c0       	rjmp	.+72     	; 0x9e <__bad_interrupt>
+  56:	00 00       	nop
+  58:	22 c0       	rjmp	.+68     	; 0x9e <__bad_interrupt>
+  5a:	00 00       	nop
+  5c:	20 c0       	rjmp	.+64     	; 0x9e <__bad_interrupt>
+  5e:	00 00       	nop
+  60:	1e c0       	rjmp	.+60     	; 0x9e <__bad_interrupt>
+  62:	00 00       	nop
+  64:	1c c0       	rjmp	.+56     	; 0x9e <__bad_interrupt>
+	...
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	ee ec       	ldi	r30, 0xCE	; 206
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <.do_copy_data_start>
+
+00000080 <.do_copy_data_loop>:
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+
+00000084 <.do_copy_data_start>:
+  84:	a8 30       	cpi	r26, 0x08	; 8
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <.do_copy_data_loop>
+
+0000008a <__do_clear_bss>:
+  8a:	11 e0       	ldi	r17, 0x01	; 1
+  8c:	a8 e0       	ldi	r26, 0x08	; 8
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	aa 30       	cpi	r26, 0x0A	; 10
+  96:	b1 07       	cpc	r27, r17
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	8b d1       	rcall	.+790    	; 0x3b2 <main>
+  9c:	96 c1       	rjmp	.+812    	; 0x3ca <_exit>
+
+0000009e <__bad_interrupt>:
+  9e:	b0 cf       	rjmp	.-160    	; 0x0 <__vectors>
+
+000000a0 <i2c_start>:
+#include "I2C.h"
+
+void i2c_start(void)         
+{ 
+    DDR_I2C  |=  _BV(SDA);
+  a0:	a7 e2       	ldi	r26, 0x27	; 39
+  a2:	b0 e0       	ldi	r27, 0x00	; 0
+  a4:	8c 91       	ld	r24, X
+  a6:	80 61       	ori	r24, 0x10	; 16
+  a8:	8c 93       	st	X, r24
+	PORT_I2C |=  _BV(SDA); _delay_us(pause);   
+  aa:	e8 e2       	ldi	r30, 0x28	; 40
+  ac:	f0 e0       	ldi	r31, 0x00	; 0
+  ae:	80 81       	ld	r24, Z
+  b0:	80 61       	ori	r24, 0x10	; 16
+  b2:	80 83       	st	Z, r24
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+  b4:	91 e0       	ldi	r25, 0x01	; 1
+  b6:	89 2f       	mov	r24, r25
+  b8:	8a 95       	dec	r24
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <i2c_start+0x18>
+    PORT_I2C |=  _BV(SCL); _delay_us(pause);          
+  bc:	80 81       	ld	r24, Z
+  be:	80 62       	ori	r24, 0x20	; 32
+  c0:	80 83       	st	Z, r24
+  c2:	89 2f       	mov	r24, r25
+  c4:	8a 95       	dec	r24
+  c6:	f1 f7       	brne	.-4      	; 0xc4 <i2c_start+0x24>
+    PORT_I2C &= ~_BV(SDA); _delay_us(pause);                              
+  c8:	80 81       	ld	r24, Z
+  ca:	8f 7e       	andi	r24, 0xEF	; 239
+  cc:	80 83       	st	Z, r24
+  ce:	89 2f       	mov	r24, r25
+  d0:	8a 95       	dec	r24
+  d2:	f1 f7       	brne	.-4      	; 0xd0 <i2c_start+0x30>
+    PORT_I2C &= ~_BV(SCL); _delay_us(pause);
+  d4:	80 81       	ld	r24, Z
+  d6:	8f 7d       	andi	r24, 0xDF	; 223
+  d8:	80 83       	st	Z, r24
+  da:	9a 95       	dec	r25
+  dc:	f1 f7       	brne	.-4      	; 0xda <i2c_start+0x3a>
+    DDR_I2C  &= ~_BV(SDA);                              
+  de:	8c 91       	ld	r24, X
+  e0:	8f 7e       	andi	r24, 0xEF	; 239
+  e2:	8c 93       	st	X, r24
+}                     
+  e4:	08 95       	ret
+
+000000e6 <i2c_write>:
+
+void i2c_write(unsigned char byt)  
+{ 
+    unsigned char k;     
+    
+    DDR_I2C |= _BV(SDA);                          
+  e6:	e7 e2       	ldi	r30, 0x27	; 39
+  e8:	f0 e0       	ldi	r31, 0x00	; 0
+  ea:	90 81       	ld	r25, Z
+  ec:	90 61       	ori	r25, 0x10	; 16
+  ee:	90 83       	st	Z, r25
+  f0:	27 e0       	ldi	r18, 0x07	; 7
+  f2:	30 e0       	ldi	r19, 0x00	; 0
+    for (k = 0; k < 8; k++)    
+    { 
+        if(0x01 & (byt >> (7 - k))) PORT_I2C |= _BV(SDA);
+  f4:	68 2f       	mov	r22, r24
+  f6:	70 e0       	ldi	r23, 0x00	; 0
+	    else PORT_I2C &= ~_BV(SDA);
+  f8:	e8 e2       	ldi	r30, 0x28	; 40
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	41 e0       	ldi	r20, 0x01	; 1
+    unsigned char k;     
+    
+    DDR_I2C |= _BV(SDA);                          
+    for (k = 0; k < 8; k++)    
+    { 
+        if(0x01 & (byt >> (7 - k))) PORT_I2C |= _BV(SDA);
+  fe:	cb 01       	movw	r24, r22
+ 100:	02 2e       	mov	r0, r18
+ 102:	02 c0       	rjmp	.+4      	; 0x108 <i2c_write+0x22>
+ 104:	95 95       	asr	r25
+ 106:	87 95       	ror	r24
+ 108:	0a 94       	dec	r0
+ 10a:	e2 f7       	brpl	.-8      	; 0x104 <i2c_write+0x1e>
+ 10c:	80 ff       	sbrs	r24, 0
+ 10e:	04 c0       	rjmp	.+8      	; 0x118 <i2c_write+0x32>
+ 110:	80 81       	ld	r24, Z
+ 112:	80 61       	ori	r24, 0x10	; 16
+ 114:	80 83       	st	Z, r24
+ 116:	03 c0       	rjmp	.+6      	; 0x11e <i2c_write+0x38>
+	    else PORT_I2C &= ~_BV(SDA);
+ 118:	80 81       	ld	r24, Z
+ 11a:	8f 7e       	andi	r24, 0xEF	; 239
+ 11c:	80 83       	st	Z, r24
+ 11e:	84 2f       	mov	r24, r20
+ 120:	8a 95       	dec	r24
+ 122:	f1 f7       	brne	.-4      	; 0x120 <i2c_write+0x3a>
+	    _delay_us(pause);   
+        PORT_I2C |=  _BV(SCL); _delay_us(pause);       
+ 124:	80 81       	ld	r24, Z
+ 126:	80 62       	ori	r24, 0x20	; 32
+ 128:	80 83       	st	Z, r24
+ 12a:	84 2f       	mov	r24, r20
+ 12c:	8a 95       	dec	r24
+ 12e:	f1 f7       	brne	.-4      	; 0x12c <i2c_write+0x46>
+        PORT_I2C &= ~ _BV(SCL); _delay_us(pause);       
+ 130:	80 81       	ld	r24, Z
+ 132:	8f 7d       	andi	r24, 0xDF	; 223
+ 134:	80 83       	st	Z, r24
+ 136:	84 2f       	mov	r24, r20
+ 138:	8a 95       	dec	r24
+ 13a:	f1 f7       	brne	.-4      	; 0x138 <i2c_write+0x52>
+ 13c:	21 50       	subi	r18, 0x01	; 1
+ 13e:	30 40       	sbci	r19, 0x00	; 0
+void i2c_write(unsigned char byt)  
+{ 
+    unsigned char k;     
+    
+    DDR_I2C |= _BV(SDA);                          
+    for (k = 0; k < 8; k++)    
+ 140:	8f ef       	ldi	r24, 0xFF	; 255
+ 142:	2f 3f       	cpi	r18, 0xFF	; 255
+ 144:	38 07       	cpc	r19, r24
+ 146:	d9 f6       	brne	.-74     	; 0xfe <i2c_write+0x18>
+	    else PORT_I2C &= ~_BV(SDA);
+	    _delay_us(pause);   
+        PORT_I2C |=  _BV(SCL); _delay_us(pause);       
+        PORT_I2C &= ~ _BV(SCL); _delay_us(pause);       
+    }
+    DDR_I2C &= ~_BV(SDA);              
+ 148:	e7 e2       	ldi	r30, 0x27	; 39
+ 14a:	f0 e0       	ldi	r31, 0x00	; 0
+ 14c:	80 81       	ld	r24, Z
+ 14e:	8f 7e       	andi	r24, 0xEF	; 239
+ 150:	80 83       	st	Z, r24
+}                      
+ 152:	08 95       	ret
+
+00000154 <i2c_stop>:
+
+void i2c_stop(void)            
+{ 
+    DDR_I2C |= _BV(SDA);
+ 154:	a7 e2       	ldi	r26, 0x27	; 39
+ 156:	b0 e0       	ldi	r27, 0x00	; 0
+ 158:	8c 91       	ld	r24, X
+ 15a:	80 61       	ori	r24, 0x10	; 16
+ 15c:	8c 93       	st	X, r24
+    PORT_I2C &= ~_BV(SDA); _delay_us(pause);   
+ 15e:	e8 e2       	ldi	r30, 0x28	; 40
+ 160:	f0 e0       	ldi	r31, 0x00	; 0
+ 162:	80 81       	ld	r24, Z
+ 164:	8f 7e       	andi	r24, 0xEF	; 239
+ 166:	80 83       	st	Z, r24
+ 168:	91 e0       	ldi	r25, 0x01	; 1
+ 16a:	89 2f       	mov	r24, r25
+ 16c:	8a 95       	dec	r24
+ 16e:	f1 f7       	brne	.-4      	; 0x16c <i2c_stop+0x18>
+    PORT_I2C |=  _BV(SCL); _delay_us(pause);           
+ 170:	80 81       	ld	r24, Z
+ 172:	80 62       	ori	r24, 0x20	; 32
+ 174:	80 83       	st	Z, r24
+ 176:	89 2f       	mov	r24, r25
+ 178:	8a 95       	dec	r24
+ 17a:	f1 f7       	brne	.-4      	; 0x178 <i2c_stop+0x24>
+    PORT_I2C |= _BV(SDA); _delay_us(pause);                            
+ 17c:	80 81       	ld	r24, Z
+ 17e:	80 61       	ori	r24, 0x10	; 16
+ 180:	80 83       	st	Z, r24
+ 182:	9a 95       	dec	r25
+ 184:	f1 f7       	brne	.-4      	; 0x182 <i2c_stop+0x2e>
+    DDR_I2C &= ~_BV(SDA);        
+ 186:	8c 91       	ld	r24, X
+ 188:	8f 7e       	andi	r24, 0xEF	; 239
+ 18a:	8c 93       	st	X, r24
+}                       
+ 18c:	08 95       	ret
+
+0000018e <i2c_ack>:
+
+unsigned char i2c_ack(void)     
+{ 
+    unsigned char check, y;        
+    
+    DDR_I2C |= _BV(SDA);                                    
+ 18e:	a7 e2       	ldi	r26, 0x27	; 39
+ 190:	b0 e0       	ldi	r27, 0x00	; 0
+ 192:	8c 91       	ld	r24, X
+ 194:	80 61       	ori	r24, 0x10	; 16
+ 196:	8c 93       	st	X, r24
+    PORT_I2C |= _BV(SDA); _delay_us(pause);
+ 198:	e8 e2       	ldi	r30, 0x28	; 40
+ 19a:	f0 e0       	ldi	r31, 0x00	; 0
+ 19c:	80 81       	ld	r24, Z
+ 19e:	80 61       	ori	r24, 0x10	; 16
+ 1a0:	80 83       	st	Z, r24
+ 1a2:	91 e0       	ldi	r25, 0x01	; 1
+ 1a4:	89 2f       	mov	r24, r25
+ 1a6:	8a 95       	dec	r24
+ 1a8:	f1 f7       	brne	.-4      	; 0x1a6 <i2c_ack+0x18>
+    DDR_I2C &= ~_BV(SDA);    
+ 1aa:	8c 91       	ld	r24, X
+ 1ac:	8f 7e       	andi	r24, 0xEF	; 239
+ 1ae:	8c 93       	st	X, r24
+    PORT_I2C |= _BV(SCL);                     
+ 1b0:	80 81       	ld	r24, Z
+ 1b2:	80 62       	ori	r24, 0x20	; 32
+ 1b4:	80 83       	st	Z, r24
+ 1b6:	9a 95       	dec	r25
+ 1b8:	f1 f7       	brne	.-4      	; 0x1b6 <i2c_ack+0x28>
+    for (y = 3; y > 0; y--)       
+    { 
+	    _delay_us(pause);                      
+        if(bit_is_clear(PIN_I2C, SDA)) break;//if ((check = SDA) == 0) break; 
+ 1ba:	34 9b       	sbis	0x06, 4	; 6
+ 1bc:	09 c0       	rjmp	.+18     	; 0x1d0 <i2c_ack+0x42>
+ 1be:	81 e0       	ldi	r24, 0x01	; 1
+ 1c0:	8a 95       	dec	r24
+ 1c2:	f1 f7       	brne	.-4      	; 0x1c0 <i2c_ack+0x32>
+ 1c4:	34 9b       	sbis	0x06, 4	; 6
+ 1c6:	04 c0       	rjmp	.+8      	; 0x1d0 <i2c_ack+0x42>
+ 1c8:	81 e0       	ldi	r24, 0x01	; 1
+ 1ca:	8a 95       	dec	r24
+ 1cc:	f1 f7       	brne	.-4      	; 0x1ca <i2c_ack+0x3c>
+ 1ce:	86 b1       	in	r24, 0x06	; 6
+    }
+    check = PIN_I2C & (1<<SDA); 
+ 1d0:	86 b1       	in	r24, 0x06	; 6
+    PORT_I2C &= ~ _BV(SCL); _delay_us(pause);   
+ 1d2:	e8 e2       	ldi	r30, 0x28	; 40
+ 1d4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1d6:	90 81       	ld	r25, Z
+ 1d8:	9f 7d       	andi	r25, 0xDF	; 223
+ 1da:	90 83       	st	Z, r25
+ 1dc:	91 e0       	ldi	r25, 0x01	; 1
+ 1de:	9a 95       	dec	r25
+ 1e0:	f1 f7       	brne	.-4      	; 0x1de <i2c_ack+0x50>
+    return (check);      
+}                        
+ 1e2:	80 71       	andi	r24, 0x10	; 16
+ 1e4:	08 95       	ret
+
+000001e6 <portInit>:
+
+void portInit()
+{
+	//DDRE = 0xff;
+	
+	DDRC |= (1 << PC4)|(1 << PC5);	//  SDA, SCL - out
+ 1e6:	e7 e2       	ldi	r30, 0x27	; 39
+ 1e8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ea:	80 81       	ld	r24, Z
+ 1ec:	80 63       	ori	r24, 0x30	; 48
+ 1ee:	80 83       	st	Z, r24
+	PORTC |= (1 << PC4)|(1 << PC5); //  SDA, SCL = 1
+ 1f0:	e8 e2       	ldi	r30, 0x28	; 40
+ 1f2:	f0 e0       	ldi	r31, 0x00	; 0
+ 1f4:	80 81       	ld	r24, Z
+ 1f6:	80 63       	ori	r24, 0x30	; 48
+ 1f8:	80 83       	st	Z, r24
+}
+ 1fa:	08 95       	ret
+
+000001fc <PCF8574_Write>:
+	lcd_com(0x06); // ????? ??????? ??????
+	lcd_com(0x0C); // ????????? ???????, ?????? ?? ?????
+}
+
+void PCF8574_Write(unsigned char data)
+{
+ 1fc:	1f 93       	push	r17
+ 1fe:	18 2f       	mov	r17, r24
+	do
+	{
+		ack = 0;
+ 200:	10 92 08 01 	sts	0x0108, r1
+		i2c_start();              //  ??????? ?????
+ 204:	4d df       	rcall	.-358    	; 0xa0 <i2c_start>
+		i2c_write(0x40);          //  ???????? ?????? PCF8574
+ 206:	80 e4       	ldi	r24, 0x40	; 64
+ 208:	6e df       	rcall	.-292    	; 0xe6 <i2c_write>
+		ack |= i2c_ack();         //  ????????????? ?? ????????
+ 20a:	c1 df       	rcall	.-126    	; 0x18e <i2c_ack>
+ 20c:	90 91 08 01 	lds	r25, 0x0108
+ 210:	98 2b       	or	r25, r24
+ 212:	90 93 08 01 	sts	0x0108, r25
+		i2c_write(data);          //  ?????? ?????? ? PCF8574
+ 216:	81 2f       	mov	r24, r17
+ 218:	66 df       	rcall	.-308    	; 0xe6 <i2c_write>
+		ack |= i2c_ack();         //  ????????????? ?? ????????
+ 21a:	b9 df       	rcall	.-142    	; 0x18e <i2c_ack>
+ 21c:	90 91 08 01 	lds	r25, 0x0108
+ 220:	98 2b       	or	r25, r24
+ 222:	90 93 08 01 	sts	0x0108, r25
+		i2c_stop();               //  ??????? ????
+ 226:	96 df       	rcall	.-212    	; 0x154 <i2c_stop>
+		blink();
+	}
+	while(ack);
+ 228:	80 91 08 01 	lds	r24, 0x0108
+ 22c:	88 23       	and	r24, r24
+ 22e:	41 f7       	brne	.-48     	; 0x200 <PCF8574_Write+0x4>
+}
+ 230:	1f 91       	pop	r17
+ 232:	08 95       	ret
+
+00000234 <lcd_data>:
+		lcd_data(data[i]);
+	}
+}
+
+void lcd_data(unsigned char value)
+{
+ 234:	1f 93       	push	r17
+ 236:	18 2f       	mov	r17, r24
+	lcd_bufer = (value & 0xF0);
+	lcd_bufer |= RS;
+
+	lcd_bufer |= E;
+ 238:	80 7f       	andi	r24, 0xF0	; 240
+ 23a:	85 60       	ori	r24, 0x05	; 5
+ 23c:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 240:	dd df       	rcall	.-70     	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 242:	80 91 09 01 	lds	r24, 0x0109
+ 246:	8b 7f       	andi	r24, 0xFB	; 251
+ 248:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 24c:	d7 df       	rcall	.-82     	; 0x1fc <PCF8574_Write>
+ 24e:	81 e2       	ldi	r24, 0x21	; 33
+ 250:	8a 95       	dec	r24
+ 252:	f1 f7       	brne	.-4      	; 0x250 <lcd_data+0x1c>
+	_delay_us(100);
+	
+	lcd_bufer = (value & 0x0F)<<4;
+	lcd_bufer |= RS;
+
+	lcd_bufer |= E;
+ 254:	12 95       	swap	r17
+ 256:	10 7f       	andi	r17, 0xF0	; 240
+ 258:	15 60       	ori	r17, 0x05	; 5
+ 25a:	10 93 09 01 	sts	0x0109, r17
+	PCF8574_Write(lcd_bufer);
+ 25e:	81 2f       	mov	r24, r17
+ 260:	cd df       	rcall	.-102    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 262:	80 91 09 01 	lds	r24, 0x0109
+ 266:	8b 7f       	andi	r24, 0xFB	; 251
+ 268:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 26c:	c7 df       	rcall	.-114    	; 0x1fc <PCF8574_Write>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 26e:	84 ef       	ldi	r24, 0xF4	; 244
+ 270:	91 e0       	ldi	r25, 0x01	; 1
+ 272:	01 97       	sbiw	r24, 0x01	; 1
+ 274:	f1 f7       	brne	.-4      	; 0x272 <lcd_data+0x3e>
+
+	_delay_ms(2);
+ 276:	1f 91       	pop	r17
+ 278:	08 95       	ret
+
+0000027a <lcd_string>:
+	_delay_us(100);
+	else _delay_ms(2);
+}
+
+void lcd_string(unsigned char *data, unsigned char nBytes)
+{
+ 27a:	0f 93       	push	r16
+ 27c:	1f 93       	push	r17
+ 27e:	cf 93       	push	r28
+ 280:	df 93       	push	r29
+ 282:	9c 01       	movw	r18, r24
+ 284:	06 2f       	mov	r16, r22
+	if(!data) return;
+ 286:	00 97       	sbiw	r24, 0x00	; 0
+ 288:	59 f0       	breq	.+22     	; 0x2a0 <lcd_string+0x26>
+	for(unsigned char i = 0; i < nBytes; i++)
+ 28a:	66 23       	and	r22, r22
+ 28c:	49 f0       	breq	.+18     	; 0x2a0 <lcd_string+0x26>
+ 28e:	18 2f       	mov	r17, r24
+ 290:	28 2f       	mov	r18, r24
+ 292:	e9 01       	movw	r28, r18
+	{
+		lcd_data(data[i]);
+ 294:	89 91       	ld	r24, Y+
+ 296:	ce df       	rcall	.-100    	; 0x234 <lcd_data>
+}
+
+void lcd_string(unsigned char *data, unsigned char nBytes)
+{
+	if(!data) return;
+	for(unsigned char i = 0; i < nBytes; i++)
+ 298:	9e 01       	movw	r18, r28
+ 29a:	21 1b       	sub	r18, r17
+ 29c:	20 17       	cp	r18, r16
+ 29e:	d0 f3       	brcs	.-12     	; 0x294 <lcd_string+0x1a>
+	{
+		lcd_data(data[i]);
+	}
+}
+ 2a0:	df 91       	pop	r29
+ 2a2:	cf 91       	pop	r28
+ 2a4:	1f 91       	pop	r17
+ 2a6:	0f 91       	pop	r16
+ 2a8:	08 95       	ret
+
+000002aa <lcd_com>:
+	while(ack);
+	return data;
+}
+
+void lcd_com(unsigned char value)
+{
+ 2aa:	1f 93       	push	r17
+ 2ac:	18 2f       	mov	r17, r24
+	lcd_bufer = value & 0xF0;
+	lcd_bufer &= ~RS;
+	
+	lcd_bufer |= E;
+ 2ae:	80 7f       	andi	r24, 0xF0	; 240
+ 2b0:	84 60       	ori	r24, 0x04	; 4
+ 2b2:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 2b6:	a2 df       	rcall	.-188    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 2b8:	80 91 09 01 	lds	r24, 0x0109
+ 2bc:	8b 7f       	andi	r24, 0xFB	; 251
+ 2be:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 2c2:	9c df       	rcall	.-200    	; 0x1fc <PCF8574_Write>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 2c4:	81 e2       	ldi	r24, 0x21	; 33
+ 2c6:	8a 95       	dec	r24
+ 2c8:	f1 f7       	brne	.-4      	; 0x2c6 <lcd_com+0x1c>
+	_delay_us(100);
+	
+	lcd_bufer = (value & 0x0F)<<4;
+	lcd_bufer &= ~RS;
+
+	lcd_bufer |= E;
+ 2ca:	81 2f       	mov	r24, r17
+ 2cc:	82 95       	swap	r24
+ 2ce:	80 7f       	andi	r24, 0xF0	; 240
+ 2d0:	84 60       	ori	r24, 0x04	; 4
+ 2d2:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 2d6:	92 df       	rcall	.-220    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 2d8:	80 91 09 01 	lds	r24, 0x0109
+ 2dc:	8b 7f       	andi	r24, 0xFB	; 251
+ 2de:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 2e2:	8c df       	rcall	.-232    	; 0x1fc <PCF8574_Write>
+
+	if(value & 0b11111100)
+ 2e4:	1c 7f       	andi	r17, 0xFC	; 252
+ 2e6:	21 f0       	breq	.+8      	; 0x2f0 <lcd_com+0x46>
+ 2e8:	81 e2       	ldi	r24, 0x21	; 33
+ 2ea:	8a 95       	dec	r24
+ 2ec:	f1 f7       	brne	.-4      	; 0x2ea <lcd_com+0x40>
+ 2ee:	04 c0       	rjmp	.+8      	; 0x2f8 <lcd_com+0x4e>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 2f0:	84 ef       	ldi	r24, 0xF4	; 244
+ 2f2:	91 e0       	ldi	r25, 0x01	; 1
+ 2f4:	01 97       	sbiw	r24, 0x01	; 1
+ 2f6:	f1 f7       	brne	.-4      	; 0x2f4 <lcd_com+0x4a>
+	_delay_us(100);
+	else _delay_ms(2);
+}
+ 2f8:	1f 91       	pop	r17
+ 2fa:	08 95       	ret
+
+000002fc <lcd_init>:
+	//PORTE = 0xf;
+	//_delay_ms(FREQ);
+}
+
+void lcd_init(void)
+{
+ 2fc:	1f 93       	push	r17
+	PCF8574_Write(0b00000000);
+ 2fe:	80 e0       	ldi	r24, 0x00	; 0
+ 300:	7d df       	rcall	.-262    	; 0x1fc <PCF8574_Write>
+ 302:	80 e1       	ldi	r24, 0x10	; 16
+ 304:	97 e2       	ldi	r25, 0x27	; 39
+ 306:	01 97       	sbiw	r24, 0x01	; 1
+ 308:	f1 f7       	brne	.-4      	; 0x306 <lcd_init+0xa>
+	_delay_ms(40);
+
+	lcd_bufer = 0b00110000;
+ 30a:	80 e3       	ldi	r24, 0x30	; 48
+ 30c:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 310:	75 df       	rcall	.-278    	; 0x1fc <PCF8574_Write>
+
+	lcd_bufer |= E;
+ 312:	80 91 09 01 	lds	r24, 0x0109
+ 316:	84 60       	ori	r24, 0x04	; 4
+ 318:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 31c:	6f df       	rcall	.-290    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 31e:	80 91 09 01 	lds	r24, 0x0109
+ 322:	8b 7f       	andi	r24, 0xFB	; 251
+ 324:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 328:	69 df       	rcall	.-302    	; 0x1fc <PCF8574_Write>
+ 32a:	82 ee       	ldi	r24, 0xE2	; 226
+ 32c:	94 e0       	ldi	r25, 0x04	; 4
+ 32e:	01 97       	sbiw	r24, 0x01	; 1
+ 330:	f1 f7       	brne	.-4      	; 0x32e <lcd_init+0x32>
+
+	_delay_ms(5);
+
+	lcd_bufer |= E;
+ 332:	80 91 09 01 	lds	r24, 0x0109
+ 336:	84 60       	ori	r24, 0x04	; 4
+ 338:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 33c:	5f df       	rcall	.-322    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 33e:	80 91 09 01 	lds	r24, 0x0109
+ 342:	8b 7f       	andi	r24, 0xFB	; 251
+ 344:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 348:	59 df       	rcall	.-334    	; 0x1fc <PCF8574_Write>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 34a:	11 e2       	ldi	r17, 0x21	; 33
+ 34c:	81 2f       	mov	r24, r17
+ 34e:	8a 95       	dec	r24
+ 350:	f1 f7       	brne	.-4      	; 0x34e <lcd_init+0x52>
+
+	_delay_us(100);
+
+	lcd_bufer |= E;
+ 352:	80 91 09 01 	lds	r24, 0x0109
+ 356:	84 60       	ori	r24, 0x04	; 4
+ 358:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 35c:	4f df       	rcall	.-354    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 35e:	80 91 09 01 	lds	r24, 0x0109
+ 362:	8b 7f       	andi	r24, 0xFB	; 251
+ 364:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 368:	49 df       	rcall	.-366    	; 0x1fc <PCF8574_Write>
+ 36a:	81 2f       	mov	r24, r17
+ 36c:	8a 95       	dec	r24
+ 36e:	f1 f7       	brne	.-4      	; 0x36c <lcd_init+0x70>
+
+	_delay_us(100);
+
+	lcd_bufer = 0b00100000;
+ 370:	80 e2       	ldi	r24, 0x20	; 32
+ 372:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 376:	42 df       	rcall	.-380    	; 0x1fc <PCF8574_Write>
+
+	lcd_bufer |= E;
+ 378:	80 91 09 01 	lds	r24, 0x0109
+ 37c:	84 60       	ori	r24, 0x04	; 4
+ 37e:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 382:	3c df       	rcall	.-392    	; 0x1fc <PCF8574_Write>
+	lcd_bufer &= ~E;
+ 384:	80 91 09 01 	lds	r24, 0x0109
+ 388:	8b 7f       	andi	r24, 0xFB	; 251
+ 38a:	80 93 09 01 	sts	0x0109, r24
+	PCF8574_Write(lcd_bufer);
+ 38e:	36 df       	rcall	.-404    	; 0x1fc <PCF8574_Write>
+ 390:	81 2f       	mov	r24, r17
+ 392:	8a 95       	dec	r24
+ 394:	f1 f7       	brne	.-4      	; 0x392 <lcd_init+0x96>
+
+	_delay_us(100);
+
+	lcd_com(0x28); // ???? 4 ???, LCD - 2 ??????
+ 396:	88 e2       	ldi	r24, 0x28	; 40
+ 398:	88 df       	rcall	.-240    	; 0x2aa <lcd_com>
+	lcd_com(0x08); // ?????? ?????????? ???????
+ 39a:	88 e0       	ldi	r24, 0x08	; 8
+ 39c:	86 df       	rcall	.-244    	; 0x2aa <lcd_com>
+	lcd_com(0x01); // ??????? ???????
+ 39e:	81 e0       	ldi	r24, 0x01	; 1
+ 3a0:	84 df       	rcall	.-248    	; 0x2aa <lcd_com>
+ 3a2:	1a 95       	dec	r17
+ 3a4:	f1 f7       	brne	.-4      	; 0x3a2 <lcd_init+0xa6>
+	_delay_us(100);
+	lcd_com(0x06); // ????? ??????? ??????
+ 3a6:	86 e0       	ldi	r24, 0x06	; 6
+ 3a8:	80 df       	rcall	.-256    	; 0x2aa <lcd_com>
+	lcd_com(0x0C); // ????????? ???????, ?????? ?? ?????
+ 3aa:	8c e0       	ldi	r24, 0x0C	; 12
+ 3ac:	7e df       	rcall	.-260    	; 0x2aa <lcd_com>
+}
+ 3ae:	1f 91       	pop	r17
+ 3b0:	08 95       	ret
+
+000003b2 <main>:
+void lcd_string(unsigned char *data, unsigned char nBytes);
+void lcd_data(unsigned char value);
+
+
+int main()
+{
+ 3b2:	cf 93       	push	r28
+ 3b4:	df 93       	push	r29
+	portInit();
+ 3b6:	17 df       	rcall	.-466    	; 0x1e6 <portInit>
+	
+	lcd_init();
+ 3b8:	a1 df       	rcall	.-190    	; 0x2fc <lcd_init>
+	
+    while (1) 
+    {
+		lcd_com(0x80);
+		lcd_string("KEY #1", 6);
+ 3ba:	c0 e0       	ldi	r28, 0x00	; 0
+ 3bc:	d1 e0       	ldi	r29, 0x01	; 1
+	
+	lcd_init();
+	
+    while (1) 
+    {
+		lcd_com(0x80);
+ 3be:	80 e8       	ldi	r24, 0x80	; 128
+ 3c0:	74 df       	rcall	.-280    	; 0x2aa <lcd_com>
+		lcd_string("KEY #1", 6);
+ 3c2:	ce 01       	movw	r24, r28
+ 3c4:	66 e0       	ldi	r22, 0x06	; 6
+ 3c6:	59 df       	rcall	.-334    	; 0x27a <lcd_string>
+ 3c8:	fa cf       	rjmp	.-12     	; 0x3be <main+0xc>
+
+000003ca <_exit>:
+ 3ca:	f8 94       	cli
+
+000003cc <__stop_program>:
+ 3cc:	ff cf       	rjmp	.-2      	; 0x3cc <__stop_program>
