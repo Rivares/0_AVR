@@ -1,44 +1,22 @@
-#define PIN_PIR 7
-#define PIN_LED 4
-
 volatile uint8_t m_data = 0x05;
 
 void setup (void)
 {
   Serial.begin(115200);
 
-  pinMode(PIN_PIR, INPUT);
-  pinMode(PIN_LED, OUTPUT);
-
   SPI_SlaveInit();
 }
 
 void loop (void)
 { 
-  // Slave work.........
-
-  int m_detect_action = digitalRead(PIN_PIR);
-  Serial.println(m_detect_action);
-
-  
-  if (m_detect_action)
-  {
-    //Если обнаружили движение
-    digitalWrite(PIN_LED, HIGH);
-  }
-  else
-  {
-    digitalWrite(PIN_LED, LOW);
-  }
-
-  // ________________________________________________
-  
-  // Connection with Master
-
-  m_data = 0x05 + m_detect_action;
-
   volatile uint8_t local_tmp = SPI_SlaveReceive();
   SPI_SlaveSend(m_data);
+
+ SPDR = 0x00;
+  SPSR = 0x00; 
+ 
+  
+  Serial.print("\nSPDR = "); Serial.print(SPDR);
 }
 
 void SPI_SlaveInit(void)
@@ -58,7 +36,7 @@ void SPI_SlaveInit(void)
 
 void SPI_SlaveSend(uint8_t data)
 { 
-  SPDR = m_data;   
+  SPDR = m_data;  
 }
 
 uint8_t SPI_SlaveReceive()

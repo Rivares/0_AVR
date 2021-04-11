@@ -17,11 +17,11 @@ void loop (void)
 { 
   // Slave work.........
 
-  int m_detect_action = digitalRead(PIN_PIR);
-  Serial.println(m_detect_action);
+  int pirVal = digitalRead(PIN_PIR);
+  Serial.println(pirVal);
 
   
-  if (m_detect_action)
+  if (pirVal)
   {
     //Если обнаружили движение
     digitalWrite(PIN_LED, HIGH);
@@ -34,8 +34,6 @@ void loop (void)
   // ________________________________________________
   
   // Connection with Master
-
-  m_data = 0x05 + m_detect_action;
 
   volatile uint8_t local_tmp = SPI_SlaveReceive();
   SPI_SlaveSend(m_data);

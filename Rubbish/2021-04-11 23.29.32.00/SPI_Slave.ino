@@ -35,7 +35,7 @@ void loop (void)
   
   // Connection with Master
 
-  m_data = 0x05 + m_detect_action;
+  m_data += m_detect_action;
 
   volatile uint8_t local_tmp = SPI_SlaveReceive();
   SPI_SlaveSend(m_data);
